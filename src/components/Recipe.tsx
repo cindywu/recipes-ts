@@ -19,8 +19,8 @@ export default function Recipe({name, servings, cookTime, instructions, ingredie
     <div>
       <div>
         <h3>{name}</h3>
-        <button>Edit</button>
-        <button>Delete</button>
+        <button className='btn'>Edit</button>
+        <button className='btn'>Delete</button>
       </div>
       <div>
         <span>Cook Time:</span>
