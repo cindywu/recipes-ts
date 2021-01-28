@@ -10,12 +10,18 @@ type RecipeListProps = {
     instructions: string,
   }>
 }
-
+ 
 export default function RecipeList({ recipes }: RecipeListProps) {
   return (
-    <>
-      <Recipe />
-      <Recipe />
-    </>
+    <div>
+      {recipes.map(recipe => {
+        return (
+          <Recipe 
+            key={recipe.id}
+            {...recipe} 
+          />
+        )
+      })}
+    </div>
   )
 }
