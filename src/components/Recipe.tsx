@@ -19,8 +19,10 @@ export default function Recipe({name, servings, cookTime, instructions, ingredie
     <div className="recipe">
       <div className="recipe__header">
         <h3 className="recipe__title">{name}</h3>
-        <button className='btn btn--primary mr-1'>Edit</button>
-        <button className='btn btn--danger'>Delete</button>
+        <div>
+          <button className='btn btn--primary mr-1'>Edit</button>
+          <button className='btn btn--danger'>Delete</button>
+        </div>
       </div>
       <div className="recipe__row">
         <span className="recipe__label">Cook Time:</span>
