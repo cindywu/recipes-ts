@@ -8,6 +8,11 @@ type RecipeListProps = {
     servings: number,
     cookTime: string,
     instructions: string,
+    ingredients: Array <{
+      id: number,
+      name: string,
+      amount: string,
+    }>
   }>
 }
  

@@ -6,9 +6,14 @@ interface RecipeProps {
     servings: number,
     cookTime: string,
     instructions: string,
+    ingredients: Array<{
+      id: number,
+      name: string,
+      amount: string,
+    }>
 }
 
-export default function Recipe({name, servings, cookTime, instructions}: RecipeProps) {
+export default function Recipe({name, servings, cookTime, instructions, ingredients}: RecipeProps) {
   return (
     <div>
       <div>
