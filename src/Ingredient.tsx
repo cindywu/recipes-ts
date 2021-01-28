@@ -6,7 +6,7 @@ interface IngredientProps {
   amount: string,
 }
 
-export default function Ingredient( { id, name, amount }: IngredientProps ) {
+export default function Ingredient( { name, amount }: IngredientProps ) {
   return (
     <>
       <span>{name}</span>

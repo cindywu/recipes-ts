@@ -18,15 +18,18 @@ type RecipeListProps = {
  
 export default function RecipeList({ recipes }: RecipeListProps) {
   return (
-    <div>
-      {recipes.map(recipe => {
-        return (
-          <Recipe 
-            key={recipe.id}
-            {...recipe} 
-          />
-        )
-      })}
-    </div>
+    <>
+      <div>
+        {recipes.map(recipe => {
+          return (
+            <Recipe 
+              key={recipe.id}
+              {...recipe} 
+            />
+          )
+        })}
+      </div>
+      <button>Add Recipe</button>
+    </>
   )
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import IngredientList from './IngredientList'
 
 interface RecipeProps {
     id: number,
@@ -34,6 +35,10 @@ export default function Recipe({name, servings, cookTime, instructions, ingredie
         <div>
           {instructions}
         </div>
+      </div>
+      <div>
+        <span>Ingredients:</span>
+        <IngredientList ingredients={ingredients} />
       </div>
     </div>
   )
