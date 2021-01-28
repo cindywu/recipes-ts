@@ -16,29 +16,31 @@ interface RecipeProps {
 
 export default function Recipe({name, servings, cookTime, instructions, ingredients}: RecipeProps) {
   return (
-    <div>
-      <div>
-        <h3>{name}</h3>
-        <button className='btn'>Edit</button>
-        <button className='btn'>Delete</button>
+    <div className="recipe">
+      <div className="recipe__header">
+        <h3 className="recipe__title">{name}</h3>
+        <button className='btn btn--primary mr-1'>Edit</button>
+        <button className='btn btn--danger'>Delete</button>
       </div>
-      <div>
-        <span>Cook Time:</span>
-        <span>{cookTime}</span>
+      <div className="recipe__row">
+        <span className="recipe__label">Cook Time:</span>
+        <span className="recipe__value">{cookTime}</span>
       </div>
-      <div>
-        <span>Servings:</span>
-        <span>{servings}</span>
+      <div className="recipe__row">
+        <span className="recipe__label">Servings:</span>
+        <span className="recipe__value">{servings}</span>
       </div>
-      <div>
-        <span>Instructions:</span>
-        <div>
+      <div className="recipe__row">
+        <span className="recipe__label">Instructions:</span>
+        <div className="recipe__value recipe__instructions recipe__value--indented">
           {instructions}
         </div>
       </div>
-      <div>
-        <span>Ingredients:</span>
-        <IngredientList ingredients={ingredients} />
+      <div className="recipe__row">
+        <span className="recipe__label">Ingredients:</span>
+        <div className="recipe__value recipe__value--indented">
+          <IngredientList ingredients={ingredients} />
+        </div>
       </div>
     </div>
   )
