@@ -4,6 +4,11 @@
   border-bottom: 1px solid black;
 }
 
+.recipe:last-child {
+  border-bottom: none;
+  padding-bottom: 10px;
+}
+
 .recipe__header {
   display: flex;
   justify-content: space-between;
