@@ -1,5 +1,6 @@
 import React from 'react'
 import IngredientList from './IngredientList'
+import { useRecipes } from './App'
 
 interface RecipeProps {
   id: string,
@@ -12,22 +13,33 @@ interface RecipeProps {
     name: string,
     amount: string,
   }>
-  handleRecipeDelete: any,
 }
 
-export default function Recipe({id, name, servings, cookTime, instructions, ingredients, handleRecipeDelete}: RecipeProps) {
+export default function Recipe({id, name, servings, cookTime, instructions, ingredients}: RecipeProps) {
+
+  const DeleteRecipeButton = () => {
+    const { recipes, setRecipes } = useRecipes ()!
+  
+    function handleRecipeDelete(id: string) {
+      setRecipes(recipes.filter((recipe: any) => recipe.id !== id))
+    }
+  
+    return (
+      <button 
+        className='btn btn--danger'
+        onClick={() => handleRecipeDelete(id)}
+      >
+        Delete
+      </button> 
+    )
+  }
   return (
     <div className="recipe">
       <div className="recipe__header">
         <h3 className="recipe__title">{name}</h3>
         <div>
           <button className='btn btn--primary mr-1'>Edit</button>
-          <button 
-            className='btn btn--danger'
-            onClick={() => handleRecipeDelete(id)}
-          >
-            Delete
-          </button>
+          <DeleteRecipeButton />
         </div>
       </div>
       <div className="recipe__row">

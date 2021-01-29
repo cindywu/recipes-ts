@@ -1,40 +1,43 @@
-import React, { useState } from 'react'
+import React, { useState, createContext, useEffect, useContext} from 'react'
 import RecipeList from './RecipeList'
 import '../css/app.css'
-import {v4 as uuidv4} from 'uuid'
 
-function App() {
+type RecipesContextType = {
+  recipes: any
+  setRecipes: (value: any) => void
+}
+
+const RecipesContext = createContext<RecipesContextType | undefined>(
+  undefined
+)
+
+type Props = {
+  children: React.ReactNode
+}
+
+export const RecipeProvider = ({ children }: Props) => {
   const [recipes, setRecipes] = useState(sampleRecipes)
 
-  function handleRecipeAdd() {
-    const newRecipe = {
-      id: uuidv4(),
-      name: 'New',
-      servings: 1,
-      cookTime: '1:00',
-      instructions: 'Instr.',
-      ingredients: [
-        { id: uuidv4(), name: 'Name', amount: '1 Tbs'}
-      ]
-    }
-  
-    setRecipes([...recipes, newRecipe])
-  }
-  
-  function handleRecipeDelete(id: string) {
-    setRecipes(recipes.filter(recipe => recipe.id !== id))
-  }
+  useEffect(() => {
+    setRecipes(sampleRecipes)
+  }, [])
 
   return (
-    <RecipeList 
-      recipes={recipes}
-      handleRecipeAdd={handleRecipeAdd}
-      handleRecipeDelete={handleRecipeDelete}
-    />
+    <RecipesContext.Provider value={{ recipes, setRecipes }}>
+      {children}
+    </RecipesContext.Provider>
   )
 }
 
+export const useRecipes = () => useContext(RecipesContext)
 
+function App() {
+  return (
+    <RecipeProvider>
+      <RecipeList />
+    </RecipeProvider>
+  )
+}
 
 const sampleRecipes = [
   {
