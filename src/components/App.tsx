@@ -1,5 +1,6 @@
 import React, { useState, createContext, useEffect, useContext } from 'react'
 import RecipeList from './RecipeList'
+import RecipeEdit from './RecipeEdit'
 import '../css/app.css'
 
 type RecipesContextType = {
@@ -42,6 +43,7 @@ function App() {
   return (
     <RecipeProvider>
       <RecipeList />
+      <RecipeEdit />
     </RecipeProvider>
   )
 }

@@ -3,10 +3,12 @@
 @import 'recipe-list.css';
 @import 'recipe.css';
 @import 'ingredient-list.css';
+@import 'recipe-edit.css';
 
 
 *, *::before, *::after {
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+  box-sizing: border-box;
 }
 
 html {
