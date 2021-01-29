@@ -2,13 +2,13 @@ import React from 'react'
 import IngredientList from './IngredientList'
 
 interface RecipeProps {
-    id: number,
+    id: string,
     name: string,
     servings: number,
     cookTime: string,
     instructions: string,
     ingredients: Array<{
-      id: number,
+      id: string,
       name: string,
       amount: string,
     }>

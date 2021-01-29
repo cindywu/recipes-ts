@@ -1,7 +1,7 @@
 import React from 'react'
 
 interface IngredientProps {
-  id: number,
+  id: string,
   name: string,
   amount: string,
 }

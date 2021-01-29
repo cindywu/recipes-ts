@@ -3,7 +3,7 @@ import Ingredient from './Ingredient'
 
 interface IngredientListProps {
   ingredients: Array<{
-    id: number,
+    id: string,
     name: string,
     amount: string,
   }>
