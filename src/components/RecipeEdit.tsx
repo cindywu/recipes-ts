@@ -3,7 +3,26 @@ import RecipeIngredientEdit from './RecipeIngredientEdit'
 import { useRecipes } from './App'
 
 export default function RecipeEdit() {
-  const { selectedRecipe } = useRecipes ()!
+  const { selectedRecipe, recipes, setRecipes} = useRecipes ()!
+
+  function handleRecipeChange(id: string, recipe: any) {
+    const newRecipes = [...recipes]
+    const index = newRecipes.findIndex((r: any) => r.id === id)
+    newRecipes[index] = recipe
+    setRecipes(newRecipes)
+  }
+
+  function handleChange(changes: any) {
+    handleRecipeChange(selectedRecipe.id, { ...selectedRecipe, ...changes})
+  }
+
+  function handleIngredientChange(id: string, ingredient: any) {
+    const newIngredients = [...selectedRecipe.ingredients]
+    const index = newIngredients.findIndex((i: any) => i.id === id)
+    newIngredients[index] = ingredient
+    handleChange({ ingredients: newIngredients })
+  }
+
   return (
     <>
       {selectedRecipe &&
@@ -22,6 +41,7 @@ export default function RecipeEdit() {
               name="name" 
               id="name"
               value={selectedRecipe.name}
+              onInput={e => handleChange({ name: (e.target as HTMLTextAreaElement).value })}
               className="recipe-edit__input"
             />
             <label
@@ -35,6 +55,7 @@ export default function RecipeEdit() {
               name="cookTime" 
               id="cookTime"
               value={selectedRecipe.cookTime}
+              onInput={e => handleChange({ cookTime: (e.target as HTMLTextAreaElement).value })}
               className="recipe-edit__input"
             />
             <label 
@@ -49,6 +70,7 @@ export default function RecipeEdit() {
               name="servings" 
               id="servings" 
               value={selectedRecipe.servings}
+              onInput={e => handleChange({ servings: parseInt((e.target as HTMLTextAreaElement).value) || '' })}
               className="recipe-edit__input"
             />
             <label 
@@ -60,10 +82,10 @@ export default function RecipeEdit() {
             <textarea 
               name="instructions" 
               id="instructions"
+              onInput={e => handleChange({ instructions: (e.target as HTMLTextAreaElement).value })}
+              value={selectedRecipe.instructions}
               className="recipe-edit__input"
-            >
-              {selectedRecipe.instructions}
-            </textarea>
+            />
           </div>
           <br />
           <label className="recipe-edit__label">Ingredients</label>
@@ -74,7 +96,8 @@ export default function RecipeEdit() {
             {selectedRecipe.ingredients.map((ingredient: any) => (
               <RecipeIngredientEdit 
                 key={ingredient.id}
-                ingredient={ingredient}/>
+                ingredient={ingredient}
+                handleIngredientChange={handleIngredientChange}/>
             ))}
           </div>
           <div className="recipe-edit__add-ingredient-btn-container">
