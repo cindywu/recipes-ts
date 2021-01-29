@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect, useContext} from 'react'
+import React, { useState, createContext, useEffect, useContext } from 'react'
 import RecipeList from './RecipeList'
 import '../css/app.css'
 
@@ -11,6 +11,8 @@ const RecipesContext = createContext<RecipesContextType | undefined>(
   undefined
 )
 
+const LOCAL_STORAGE_KEY = 'recipesTypescript.recipes'
+
 type Props = {
   children: React.ReactNode
 }
@@ -19,8 +21,13 @@ export const RecipeProvider = ({ children }: Props) => {
   const [recipes, setRecipes] = useState(sampleRecipes)
 
   useEffect(() => {
-    setRecipes(sampleRecipes)
+    const recipeJSON = localStorage.getItem(LOCAL_STORAGE_KEY)
+    if (recipeJSON != null) setRecipes(JSON.parse(recipeJSON))
   }, [])
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(recipes))
+  }, [recipes])
 
   return (
     <RecipesContext.Provider value={{ recipes, setRecipes }}>
