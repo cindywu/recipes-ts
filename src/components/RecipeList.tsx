@@ -15,9 +15,10 @@ type RecipeListProps = {
     }>
   }>
   handleRecipeAdd: any,
+  handleRecipeDelete: any,
 }
  
-export default function RecipeList({ recipes, handleRecipeAdd }: RecipeListProps) {
+export default function RecipeList({ recipes, handleRecipeAdd, handleRecipeDelete }: RecipeListProps) {
   return (
     <div className="recipe-list">
       <div>
@@ -25,6 +26,7 @@ export default function RecipeList({ recipes, handleRecipeAdd }: RecipeListProps
           return (
             <Recipe 
               key={recipe.id}
+              handleRecipeDelete={handleRecipeDelete}
               {...recipe} 
             />
           )
