@@ -16,7 +16,7 @@ interface RecipeProps {
 }
 
 export default function Recipe({id, name, servings, cookTime, instructions, ingredients}: RecipeProps) {
-  const { recipes, setRecipes, setSelectedRecipeId } = useRecipes ()!
+  const { recipes, setRecipes, selectedRecipeId, setSelectedRecipeId } = useRecipes ()!
 
   const EditRecipeButton = () => {
     function handleRecipeSelect(id: string) {
@@ -35,6 +35,7 @@ export default function Recipe({id, name, servings, cookTime, instructions, ingr
 
   const DeleteRecipeButton = () => {
     function handleRecipeDelete(id: string) {
+      if (selectedRecipeId != null && selectedRecipeId === id)
       setRecipes(recipes.filter((recipe: any) => recipe.id !== id))
     }
   
