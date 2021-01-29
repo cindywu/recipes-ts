@@ -6,6 +6,9 @@ import '../css/app.css'
 type RecipesContextType = {
   recipes: any
   setRecipes: (value: any) => void
+  selectedRecipeId: any
+  setSelectedRecipeId: (value: any) => void
+  selectedRecipe: any
 }
 
 const RecipesContext = createContext<RecipesContextType | undefined>(
@@ -20,6 +23,8 @@ type Props = {
 
 export const RecipeProvider = ({ children }: Props) => {
   const [recipes, setRecipes] = useState(sampleRecipes)
+  const [selectedRecipeId, setSelectedRecipeId] = useState()
+  const selectedRecipe = recipes.find((recipe: any) => recipe.id === selectedRecipeId)
 
   useEffect(() => {
     const recipeJSON = localStorage.getItem(LOCAL_STORAGE_KEY)
@@ -31,7 +36,7 @@ export const RecipeProvider = ({ children }: Props) => {
   }, [recipes])
 
   return (
-    <RecipesContext.Provider value={{ recipes, setRecipes }}>
+    <RecipesContext.Provider value={{ recipes, setRecipes, selectedRecipeId, setSelectedRecipeId, selectedRecipe }}>
       {children}
     </RecipesContext.Provider>
   )
