@@ -13,16 +13,14 @@ interface RecipeProps {
     name: string,
     amount: string,
   }>
+  handleRecipeDelete: (id: string) => void
+  handleRecipeSelect: (id: string) => void
 }
 
-export default function Recipe({id, name, servings, cookTime, instructions, ingredients}: RecipeProps) {
-  const { recipes, setRecipes, selectedRecipeId, setSelectedRecipeId } = useRecipes ()!
+export default function Recipe({id, name, servings, cookTime, instructions, ingredients }: RecipeProps) {
+  const { handleRecipeDelete, handleRecipeSelect } = useRecipes ()!
 
   const EditRecipeButton = () => {
-    function handleRecipeSelect(id: string) {
-      setSelectedRecipeId(id)
-    }
-
     return (
       <button 
         className='btn btn--primary mr-1'
@@ -34,11 +32,6 @@ export default function Recipe({id, name, servings, cookTime, instructions, ingr
   }
 
   const DeleteRecipeButton = () => {
-    function handleRecipeDelete(id: string) {
-      if (selectedRecipeId != null && selectedRecipeId === id)
-      setRecipes(recipes.filter((recipe: any) => recipe.id !== id))
-    }
-  
     return (
       <button 
         className='btn btn--danger'
