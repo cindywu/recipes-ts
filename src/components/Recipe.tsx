@@ -2,19 +2,19 @@ import React from 'react'
 import IngredientList from './IngredientList'
 import { useRecipes } from './App'
 
+interface Ingredient {
+  id: string
+  name: string
+  amount: string
+}
+
 interface RecipeProps {
   id: string,
   name: string,
   servings: number,
   cookTime: string,
   instructions: string,
-  ingredients: Array<{
-    id: string,
-    name: string,
-    amount: string,
-  }>
-  handleRecipeDelete: (id: string) => void
-  handleRecipeSelect: (id: string) => void
+  ingredients: Array<Ingredient>
 }
 
 export default function Recipe({id, name, servings, cookTime, instructions, ingredients }: RecipeProps) {
