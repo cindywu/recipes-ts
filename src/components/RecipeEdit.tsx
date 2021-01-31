@@ -117,7 +117,7 @@ export default function RecipeEdit() {
             <div>Name</div>
             <div>Amount</div>
             <div></div>
-            {selectedRecipe.ingredients.map((ingredient: any) => (
+            {selectedRecipe.ingredients.map((ingredient: Ingredient) => (
               <RecipeIngredientEdit 
                 key={ingredient.id}
                 ingredient={ingredient}
