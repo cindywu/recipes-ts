@@ -6,9 +6,6 @@ import {v4 as uuidv4} from 'uuid'
 
 type RecipesContextType = {
   recipes: any
-  setRecipes: (value: any) => void
-  selectedRecipeId: any
-  setSelectedRecipeId: (value: any) => void
   selectedRecipe: any
   handleRecipeAdd: (value: any) => void
   handleRecipeSelect: (id: string) => void
@@ -27,7 +24,7 @@ type Props = {
 }
 
 export const RecipeProvider = ({ children }: Props) => {
-  const [recipes, setRecipes] = useState(sampleRecipes)
+  const [recipes, setRecipes] = useState<any>(sampleRecipes)
   const [selectedRecipeId, setSelectedRecipeId] = useState<string>()
   const selectedRecipe = recipes.find((recipe: any) => recipe.id === selectedRecipeId)
 
@@ -75,7 +72,14 @@ export const RecipeProvider = ({ children }: Props) => {
   }
 
   return (
-    <RecipesContext.Provider value={{ recipes, setRecipes, selectedRecipeId, setSelectedRecipeId, selectedRecipe, handleRecipeAdd, handleRecipeSelect, handleRecipeChange, handleRecipeDelete }}>
+    <RecipesContext.Provider value={{ 
+      recipes, 
+      selectedRecipe, 
+      handleRecipeAdd, 
+      handleRecipeSelect, 
+      handleRecipeChange, 
+      handleRecipeDelete 
+    }}>
       {children}
     </RecipesContext.Provider>
   )

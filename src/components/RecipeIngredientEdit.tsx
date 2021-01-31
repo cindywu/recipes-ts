@@ -2,8 +2,8 @@ import React from 'react'
 
 interface RecipeIngredientEditProps {
   ingredient: any
-  handleIngredientChange: any
-  handleIngredientDelete: any
+  handleIngredientChange: (id: string, ingredient: any) => void
+  handleIngredientDelete: (id: string) => void
 }
  
 export default function RecipeIngredientEdit({ ingredient, handleIngredientChange, handleIngredientDelete }: RecipeIngredientEditProps) {
