@@ -1,8 +1,14 @@
 import React from 'react'
 
+interface Ingredient {
+  id: string
+  name: string
+  amount: string
+}
+
 interface RecipeIngredientEditProps {
-  ingredient: any
-  handleIngredientChange: (id: string, ingredient: any) => void
+  ingredient: Ingredient
+  handleIngredientChange: (id: string, ingredient: Ingredient) => void
   handleIngredientDelete: (id: string) => void
 }
  
