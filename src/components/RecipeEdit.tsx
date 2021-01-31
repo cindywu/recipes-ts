@@ -4,10 +4,12 @@ import { useRecipes } from './App'
 import {v4 as uuidv4} from 'uuid'
 
 interface Ingredient {
-  id: string,
-  name: string,
-  amount: string,
+  id: string
+  name: string
+  amount: string
 }
+
+interface Ingredients extends Array<Ingredient>{}
 
 export default function RecipeEdit() {
   const { selectedRecipe, handleRecipeSelect, handleRecipeChange } = useRecipes ()!
@@ -61,7 +63,9 @@ export default function RecipeEdit() {
               name="name" 
               id="name"
               value={selectedRecipe.name}
-              onChange={e => handleChange({ name: e.target.value })}
+              onChange={(
+                e: React.ChangeEvent<HTMLInputElement>,
+               ): void => handleChange({ name: e.target.value })}
               className="recipe-edit__input"
               placeholder="What's cooking?"
             />
@@ -76,7 +80,9 @@ export default function RecipeEdit() {
               name="cookTime" 
               id="cookTime"
               value={selectedRecipe.cookTime}
-              onChange={e => handleChange({ cookTime: e.target.value })}
+              onChange={(
+                e: React.ChangeEvent<HTMLInputElement>,
+               ): void => handleChange({ cookTime: e.target.value })}
               className="recipe-edit__input"
               placeholder="How long will it take?"
             />
@@ -92,7 +98,9 @@ export default function RecipeEdit() {
               name="servings" 
               id="servings" 
               value={selectedRecipe.servings}
-              onChange={e => handleChange({ servings: parseInt(e.target.value) || '' })}
+              onChange={(
+                e: React.ChangeEvent<HTMLInputElement>,
+               ): void => handleChange({ servings: parseInt(e.target.value) || '' })}
               className="recipe-edit__input"
               placeholder="Feeding how many?"
             />
@@ -105,7 +113,9 @@ export default function RecipeEdit() {
             <textarea 
               name="instructions" 
               id="instructions"
-              onChange={e => handleChange({ instructions: e.target.value })}
+              onChange={(
+                e: React.ChangeEvent<HTMLTextAreaElement>,
+              ): void => handleChange({ instructions: e.target.value })}
               value={selectedRecipe.instructions}
               className="recipe-edit__input"
               placeholder="How make?"

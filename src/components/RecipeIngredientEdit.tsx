@@ -22,14 +22,18 @@ export default function RecipeIngredientEdit({ ingredient, handleIngredientChang
       <input 
         className="recipe-edit__input" 
         type="text"
-        onChange={(e) => handleChange({ name: e.target.value })}
+        onChange={(
+          e: React.ChangeEvent<HTMLInputElement>,
+        ): void => handleChange({ name: e.target.value })}
         value={ingredient.name}
         placeholder="Your next victim?"
       />
       <input 
         className="recipe-edit__input" 
         type="text"
-        onChange={(e) => handleChange({ amount: e.target.value })}
+        onChange={(
+          e: React.ChangeEvent<HTMLInputElement>,
+        ): void => handleChange({ amount: e.target.value })}
         value={ingredient.amount}
         placeholder="How many or much?"
       />
