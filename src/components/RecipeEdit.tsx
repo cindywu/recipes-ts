@@ -32,9 +32,9 @@ export default function RecipeEdit() {
     const newIngredient = {
       id: uuidv4(),
       name: '',
-      amount: ''
+      amount: '',
     }
-    handleChange({ ingredients: [...recipes.ingredients, newIngredient]})
+    handleChange({ ingredients: [...selectedRecipe.ingredients, newIngredient]})
   }
 
   function handleIngredientDelete(id: string) {
