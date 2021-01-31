@@ -2,6 +2,7 @@ import React, { useState, createContext, useEffect, useContext } from 'react'
 import RecipeList from './RecipeList'
 import RecipeEdit from './RecipeEdit'
 import '../css/app.css'
+import {v4 as uuidv4} from 'uuid'
 
 type RecipesContextType = {
   recipes: any
@@ -9,6 +10,7 @@ type RecipesContextType = {
   selectedRecipeId: any
   setSelectedRecipeId: (value: any) => void
   selectedRecipe: any
+  handleRecipeAdd: (value: any) => void
 }
 
 const RecipesContext = createContext<RecipesContextType | undefined>(
@@ -23,7 +25,7 @@ type Props = {
 
 export const RecipeProvider = ({ children }: Props) => {
   const [recipes, setRecipes] = useState(sampleRecipes)
-  const [selectedRecipeId, setSelectedRecipeId] = useState()
+  const [selectedRecipeId, setSelectedRecipeId] = useState<string>()
   const selectedRecipe = recipes.find((recipe: any) => recipe.id === selectedRecipeId)
 
   useEffect(() => {
@@ -35,8 +37,24 @@ export const RecipeProvider = ({ children }: Props) => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(recipes))
   }, [recipes])
 
+  function handleRecipeAdd() {
+    const newRecipe = {
+      id: uuidv4(),
+      name: '',
+      servings: 1,
+      cookTime: '',
+      instructions: '',
+      ingredients: [
+        { id: uuidv4(), name: '', amount: ''}
+      ]
+    }
+  
+    setSelectedRecipeId(newRecipe.id)
+    setRecipes([...recipes, newRecipe])
+  }
+
   return (
-    <RecipesContext.Provider value={{ recipes, setRecipes, selectedRecipeId, setSelectedRecipeId, selectedRecipe }}>
+    <RecipesContext.Provider value={{ recipes, setRecipes, selectedRecipeId, setSelectedRecipeId, selectedRecipe, handleRecipeAdd }}>
       {children}
     </RecipesContext.Provider>
   )
