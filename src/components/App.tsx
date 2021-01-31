@@ -17,8 +17,10 @@ interface Recipe {
   }>
 }
 
+interface Recipes extends Array<Recipe>{}
+
 type RecipesContextType = {
-  recipes: any
+  recipes: Recipes
   selectedRecipe: Recipe
   handleRecipeAdd: () => void
   handleRecipeSelect: (id: string) => void
