@@ -2,30 +2,27 @@ import React from 'react'
 import RecipeIngredientEdit from './RecipeIngredientEdit'
 import { useRecipes } from './App'
 import {v4 as uuidv4} from 'uuid'
-
-interface Ingredient {
-  id: string
-  name: string
-  amount: string
-}
-
-interface Ingredients extends Array<Ingredient>{}
+import type {Ingredient, Ingredients, RecipePatch} from './core'
 
 export default function RecipeEdit() {
-  const { selectedRecipe, handleRecipeSelect, handleRecipeChange } = useRecipes ()!
+  const { selectedRecipe, handleRecipeSelect, handleRecipeChange } = useRecipes()
 
-  function handleChange(changes: any) {
+  if (selectedRecipe === undefined) {
+    return null;
+  }
+
+  const handleChange = (changes: RecipePatch) => {
     handleRecipeChange(selectedRecipe.id, { ...selectedRecipe, ...changes})
   }
 
-  function handleIngredientChange(id: string, ingredient: Ingredient) {
-    const newIngredients = [...selectedRecipe.ingredients]
+  const handleIngredientChange = (id: string, ingredient: Ingredient) => {
+    const newIngredients: Ingredients = [...selectedRecipe.ingredients]
     const index = newIngredients.findIndex((i: Ingredient) => i.id === id)
     newIngredients[index] = ingredient
     handleChange({ ingredients: newIngredients })
   }
 
-  function handleIngredientAdd() {
+  const handleIngredientAdd =() =>  {
     const newIngredient = {
       id: uuidv4(),
       name: '',
@@ -34,7 +31,7 @@ export default function RecipeEdit() {
     handleChange({ ingredients: [...selectedRecipe.ingredients, newIngredient]})
   }
 
-  function handleIngredientDelete(id: string) {
+  const handleIngredientDelete = (id: string) => {
     handleChange({
       ingredients: selectedRecipe.ingredients.filter((i: Ingredient) => i.id !== id)
     })
@@ -100,7 +97,12 @@ export default function RecipeEdit() {
               value={selectedRecipe.servings}
               onChange={(
                 e: React.ChangeEvent<HTMLInputElement>,
-               ): void => handleChange({ servings: parseInt(e.target.value) || '' })}
+               ): void => {
+                 if (!e.target.value) {
+                  return
+                 }
+                 handleChange({ servings: parseInt(e.target.value)})
+              }}
               className="recipe-edit__input"
               placeholder="Feeding how many?"
             />
