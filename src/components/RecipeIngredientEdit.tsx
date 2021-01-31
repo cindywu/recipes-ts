@@ -19,12 +19,14 @@ export default function RecipeIngredientEdit({ ingredient, handleIngredientChang
         type="text"
         onChange={(e) => handleChange({ name: e.target.value })}
         value={ingredient.name}
+        placeholder="Your next victim?"
       />
       <input 
         className="recipe-edit__input" 
         type="text"
         onChange={(e) => handleChange({ amount: e.target.value })}
         value={ingredient.amount}
+        placeholder="How many or much?"
       />
       <button 
         className="btn btn--danger"

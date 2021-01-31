@@ -16,7 +16,7 @@ export default function RecipeEdit() {
     handleRecipeChange(selectedRecipe.id, { ...selectedRecipe, ...changes})
   }
 
-  function handleIngredientChange(id: string, ingredient: any) {
+  function handleIngredientChange(id: string, ingredient: Ingredient) {
     const newIngredients = [...selectedRecipe.ingredients]
     const index = newIngredients.findIndex((i: Ingredient) => i.id === id)
     newIngredients[index] = ingredient
@@ -63,6 +63,7 @@ export default function RecipeEdit() {
               value={selectedRecipe.name}
               onChange={e => handleChange({ name: e.target.value })}
               className="recipe-edit__input"
+              placeholder="What's cooking?"
             />
             <label
               htmlFor="cookTime"
@@ -77,6 +78,7 @@ export default function RecipeEdit() {
               value={selectedRecipe.cookTime}
               onChange={e => handleChange({ cookTime: e.target.value })}
               className="recipe-edit__input"
+              placeholder="How long will it take?"
             />
             <label 
               htmlFor="servings"
@@ -92,6 +94,7 @@ export default function RecipeEdit() {
               value={selectedRecipe.servings}
               onChange={e => handleChange({ servings: parseInt(e.target.value) || '' })}
               className="recipe-edit__input"
+              placeholder="Feeding how many?"
             />
             <label 
               htmlFor="instructions"
@@ -105,6 +108,7 @@ export default function RecipeEdit() {
               onChange={e => handleChange({ instructions: e.target.value })}
               value={selectedRecipe.instructions}
               className="recipe-edit__input"
+              placeholder="How make?"
             />
           </div>
           <br />
