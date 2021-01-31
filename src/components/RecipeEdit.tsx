@@ -4,14 +4,7 @@ import { useRecipes } from './App'
 import {v4 as uuidv4} from 'uuid'
 
 export default function RecipeEdit() {
-  const { selectedRecipe, recipes, setRecipes, handleRecipeSelect } = useRecipes ()!
-
-  function handleRecipeChange(id: string, recipe: any) {
-    const newRecipes = [...recipes]
-    const index = newRecipes.findIndex((r: any) => r.id === id)
-    newRecipes[index] = recipe
-    setRecipes(newRecipes)
-  }
+  const { selectedRecipe, handleRecipeSelect, handleRecipeChange } = useRecipes ()!
 
   function handleChange(changes: any) {
     handleRecipeChange(selectedRecipe.id, { ...selectedRecipe, ...changes})

@@ -12,6 +12,7 @@ type RecipesContextType = {
   selectedRecipe: any
   handleRecipeAdd: (value: any) => void
   handleRecipeSelect: (value: string) => void
+  handleRecipeChange: (id: string, recipe: any) => void
 }
 
 const RecipesContext = createContext<RecipesContextType | undefined>(
@@ -58,8 +59,15 @@ export const RecipeProvider = ({ children }: Props) => {
     setSelectedRecipeId(id)
   }
 
+  function handleRecipeChange(id: string, recipe: any) {
+    const newRecipes = [...recipes]
+    const index = newRecipes.findIndex((r: any) => r.id === id)
+    newRecipes[index] = recipe
+    setRecipes(newRecipes)
+  }
+
   return (
-    <RecipesContext.Provider value={{ recipes, setRecipes, selectedRecipeId, setSelectedRecipeId, selectedRecipe, handleRecipeAdd, handleRecipeSelect }}>
+    <RecipesContext.Provider value={{ recipes, setRecipes, selectedRecipeId, setSelectedRecipeId, selectedRecipe, handleRecipeAdd, handleRecipeSelect, handleRecipeChange }}>
       {children}
     </RecipesContext.Provider>
   )
