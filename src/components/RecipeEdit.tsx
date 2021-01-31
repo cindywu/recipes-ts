@@ -3,6 +3,12 @@ import RecipeIngredientEdit from './RecipeIngredientEdit'
 import { useRecipes } from './App'
 import {v4 as uuidv4} from 'uuid'
 
+interface Ingredient {
+  id: string,
+  name: string,
+  amount: string,
+}
+
 export default function RecipeEdit() {
   const { selectedRecipe, handleRecipeSelect, handleRecipeChange } = useRecipes ()!
 
@@ -12,7 +18,7 @@ export default function RecipeEdit() {
 
   function handleIngredientChange(id: string, ingredient: any) {
     const newIngredients = [...selectedRecipe.ingredients]
-    const index = newIngredients.findIndex((i: any) => i.id === id)
+    const index = newIngredients.findIndex((i: Ingredient) => i.id === id)
     newIngredients[index] = ingredient
     handleChange({ ingredients: newIngredients })
   }
@@ -28,7 +34,7 @@ export default function RecipeEdit() {
 
   function handleIngredientDelete(id: string) {
     handleChange({
-      ingredients: selectedRecipe.ingredients.filter((i: any) => i.id !== id)
+      ingredients: selectedRecipe.ingredients.filter((i: Ingredient) => i.id !== id)
     })
   }
 

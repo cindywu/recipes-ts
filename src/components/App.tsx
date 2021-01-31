@@ -4,9 +4,22 @@ import RecipeEdit from './RecipeEdit'
 import '../css/app.css'
 import {v4 as uuidv4} from 'uuid'
 
+interface Recipe {
+  id: string,
+  name: string,
+  servings: number,
+  cookTime: string,
+  instructions: string,
+  ingredients: Array<{
+    id: string,
+    name: string,
+    amount: string,
+  }>
+}
+
 type RecipesContextType = {
   recipes: any
-  selectedRecipe: any
+  selectedRecipe: Recipe
   handleRecipeAdd: (value: any) => void
   handleRecipeSelect: (id: string) => void
   handleRecipeChange: (id: string, recipe: any) => void
