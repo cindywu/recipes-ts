@@ -13,7 +13,6 @@ interface RecipeIngredientEditProps {
 }
  
 export default function RecipeIngredientEdit({ ingredient, handleIngredientChange, handleIngredientDelete }: RecipeIngredientEditProps) {
-
   function handleChange(changes: any) {
     handleIngredientChange(ingredient.id, {...ingredient, ...changes})
   }

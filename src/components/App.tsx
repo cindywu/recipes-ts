@@ -4,17 +4,19 @@ import RecipeEdit from './RecipeEdit'
 import '../css/app.css'
 import {v4 as uuidv4} from 'uuid'
 
+interface Ingredient {
+  id: string
+  name: string
+  amount: string
+}
+
 interface Recipe {
-  id: string,
-  name: string,
-  servings: number,
-  cookTime: string,
-  instructions: string,
-  ingredients: Array<{
-    id: string,
-    name: string,
-    amount: string,
-  }>
+  id: string
+  name: string
+  servings: number
+  cookTime: string
+  instructions: string
+  ingredients: Array<Ingredient>
 }
 
 interface Recipes extends Array<Recipe>{}

@@ -2,6 +2,21 @@ import React from 'react'
 import Recipe from './Recipe'
 import { useRecipes } from './App'
 
+interface Ingredient {
+  id: string
+  name: string
+  amount: string
+}
+
+interface Recipe {
+  id: string
+  name: string
+  servings: number
+  cookTime: string
+  instructions: string
+  ingredients: Array<Ingredient>
+}
+
 const AddRecipeButton = () => {
   const { handleRecipeAdd } = useRecipes ()!
 
@@ -23,7 +38,7 @@ export default function RecipeList() {
   return (
     <div className="recipe-list">
       <div>
-        {recipes.map((recipe: any) => {
+        {recipes.map((recipe: Recipe) => {
           return (
             <Recipe 
               key={recipe.id}
