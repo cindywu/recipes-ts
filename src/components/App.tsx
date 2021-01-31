@@ -11,7 +11,7 @@ type RecipesContextType = {
   setSelectedRecipeId: (value: any) => void
   selectedRecipe: any
   handleRecipeAdd: (value: any) => void
-  handleRecipeSelect: (value: string) => void
+  handleRecipeSelect: (id: string) => void
   handleRecipeChange: (id: string, recipe: any) => void
 }
 
