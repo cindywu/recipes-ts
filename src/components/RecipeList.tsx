@@ -19,7 +19,6 @@ const AddRecipeButton = () => {
  
 export default function RecipeList() {
   const { recipes } = useRecipes ()!
-  console.log('recipes', recipes)
   
   return (
     <div className="recipe-list">

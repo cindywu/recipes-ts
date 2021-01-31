@@ -4,11 +4,7 @@ import { useRecipes } from './App'
 import {v4 as uuidv4} from 'uuid'
 
 export default function RecipeEdit() {
-  const { selectedRecipe, setSelectedRecipeId, recipes, setRecipes} = useRecipes ()!
-
-  function handleRecipeSelect(id: string) {
-    setSelectedRecipeId(id)
-  }
+  const { selectedRecipe, recipes, setRecipes, handleRecipeSelect } = useRecipes ()!
 
   function handleRecipeChange(id: string, recipe: any) {
     const newRecipes = [...recipes]
