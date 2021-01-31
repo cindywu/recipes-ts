@@ -20,9 +20,9 @@ interface Recipe {
 type RecipesContextType = {
   recipes: any
   selectedRecipe: Recipe
-  handleRecipeAdd: (value: any) => void
+  handleRecipeAdd: () => void
   handleRecipeSelect: (id: string) => void
-  handleRecipeChange: (id: string, recipe: any) => void
+  handleRecipeChange: (id: string, recipe: Recipe) => void
   handleRecipeDelete: (id: string) => void
 }
 
@@ -39,7 +39,7 @@ type Props = {
 export const RecipeProvider = ({ children }: Props) => {
   const [recipes, setRecipes] = useState<any>(sampleRecipes)
   const [selectedRecipeId, setSelectedRecipeId] = useState<string>()
-  const selectedRecipe = recipes.find((recipe: any) => recipe.id === selectedRecipeId)
+  const selectedRecipe = recipes.find((recipe: Recipe) => recipe.id === selectedRecipeId)
 
   useEffect(() => {
     const recipeJSON = localStorage.getItem(LOCAL_STORAGE_KEY)
@@ -70,9 +70,9 @@ export const RecipeProvider = ({ children }: Props) => {
     setSelectedRecipeId(id)
   }
 
-  function handleRecipeChange(id: string, recipe: any) {
+  function handleRecipeChange(id: string, recipe: Recipe) {
     const newRecipes = [...recipes]
-    const index = newRecipes.findIndex((r: any) => r.id === id)
+    const index = newRecipes.findIndex((r: Recipe) => r.id === id)
     newRecipes[index] = recipe
     setRecipes(newRecipes)
   }
@@ -81,7 +81,7 @@ export const RecipeProvider = ({ children }: Props) => {
     if (selectedRecipeId != null && selectedRecipeId === id) {
       setSelectedRecipeId(undefined)
     }
-    setRecipes(recipes.filter((recipe: any) => recipe.id !== id))
+    setRecipes(recipes.filter((recipe: Recipe) => recipe.id !== id))
   }
 
   return (
