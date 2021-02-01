@@ -3,36 +3,30 @@ import RecipeList from './RecipeList'
 import RecipeEdit from './RecipeEdit'
 import '../css/app.css'
 import {v4 as uuidv4} from 'uuid'
-
-interface Ingredient {
-  id: string
-  name: string
-  amount: string
-}
-
-interface Recipe {
-  id: string
-  name: string
-  servings: number
-  cookTime: string
-  instructions: string
-  ingredients: Array<Ingredient>
-}
+import {Recipe} from './core'
 
 interface Recipes extends Array<Recipe>{}
 
 type RecipesContextType = {
   recipes: Recipes
-  selectedRecipe: Recipe
+  selectedRecipe: Recipe | undefined
   handleRecipeAdd: () => void
   handleRecipeSelect: (id: string) => void
   handleRecipeChange: (id: string, recipe: Recipe) => void
   handleRecipeDelete: (id: string) => void
 }
 
-const RecipesContext = createContext<RecipesContextType | undefined>(
-  undefined
-)
+// Only used when there is no Context Provider around a Consumer:
+const defaultContextValue = {
+  recipes: [],
+  selectedRecipe:  undefined,
+  handleRecipeAdd: () => {},
+  handleRecipeSelect: (id: string) => {},
+  handleRecipeChange: (id: string, recipe: Recipe) => {},
+  handleRecipeDelete: (id: string) => {},
+};
+
+const RecipesContext = createContext<RecipesContextType>(defaultContextValue)
 
 const LOCAL_STORAGE_KEY = 'recipesTypescript.recipes'
 
@@ -41,7 +35,7 @@ type Props = {
 }
 
 export const RecipeProvider = ({ children }: Props) => {
-  const [recipes, setRecipes] = useState<any>(sampleRecipes)
+  const [recipes, setRecipes] = useState<Recipes>(sampleRecipes)
   const [selectedRecipeId, setSelectedRecipeId] = useState<string>()
   const selectedRecipe = recipes.find((recipe: Recipe) => recipe.id === selectedRecipeId)
 
